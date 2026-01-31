@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CYRUS - Game Service Terlengkap</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="bg-dark text-gray-200 font-sans antialiased">
+
+    <nav class="bg-darker border-b border-gray-800 sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <div class="flex items-center">
+                    <a href="#" class="text-2xl font-bold text-primary tracking-wider">
+                        <i class="fa-solid fa-gamepad mr-2"></i>CYRUS
+                    </a>
+                </div>
+
+                <div class="hidden md:block flex-1 max-w-lg mx-8">
+                    <div class="relative">
+                        <span class="absolute inset-y-0 left-0 pl-3 flex items-center">
+                            <i class="fa-solid fa-search text-gray-500"></i>
+                        </span>
+                        <input type="text" class="w-full bg-secondary text-white rounded-lg pl-10 pr-4 py-2 focus:outline-none focus:ring-2 focus:ring-primary" placeholder="Cari layanan (Contoh: Joki ML...)">
+                    </div>
+                </div>
+
+                <div class="flex items-center space-x-4">
+                    <a href="#" class="hidden md:block hover:text-primary"><i class="fa-solid fa-calculator mr-1"></i> Kalkulator</a>
+                    <a href="#" class="hidden md:block hover:text-primary"><i class="fa-solid fa-list-check mr-1"></i> Cek Transaksi</a>
+                    <div class="border-l border-gray-700 h-6 mx-2 hidden md:block"></div>
+                    <a href="#" class="text-sm font-semibold hover:text-white text-gray-400">Masuk</a>
+                    <a href="#" class="bg-primary text-darker px-4 py-2 rounded-lg font-bold hover:bg-yellow-500 transition">Daftar</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+       
+        <div class="rounded-2xl overflow-hidden shadow-2xl relative h-48 md:h-80 bg-gray-800 flex items-center justify-center mb-8">
+            <img src="assets/banner-web/2.png" alt="Banner Promo" class="absolute inset-0 w-full h-full object-cover opacity-80">
+        </div>
+
+        <div class="flex overflow-x-auto space-x-4 pb-4 mb-10" id="category-container">
+            <button class="category-btn active flex-shrink-0 px-6 py-2 rounded-full font-bold transition">Semua</button>
+            <button class="category-btn flex-shrink-0 px-6 py-2 rounded-full font-medium transition">Joki Game</button>
+            <button class="category-btn flex-shrink-0 px-6 py-2 rounded-full font-medium transition">Jual Akun</button>
+            <button class="category-btn flex-shrink-0 px-6 py-2 rounded-full font-medium transition">Beli Akun</button>
+            <button class="category-btn flex-shrink-0 px-6 py-2 rounded-full font-medium transition">Rekber</button>
+            <button class="category-btn flex-shrink-0 px-6 py-2 rounded-full font-medium transition">Bengkel Akun</button>
+        </div>
+
+    
+        <div class="mb-12">
+            <div class="mb-6">
+                <h2 class="text-2xl font-bold flex items-center text-white">
+                    <i class="fa-solid fa-fire text-orange-500 mr-2"></i> POPULER SEKARANG!
+                </h2>
+                <p class="text-gray-400 text-sm mt-1 ml-1">Berikut adalah beberapa produk yang paling populer saat ini.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                <div class="relative bg-gradient-to-r from-blue-900 to-slate-800 rounded-xl p-4 flex items-center overflow-hidden hover:scale-[1.02] transition cursor-pointer border border-transparent hover:border-blue-400 group">
+                    <div class="absolute inset-0 bg-stripes-white pointer-events-none"></div>
+                    <img src="assets/logo-game/logo-miya-mlbb.jpg" alt="MLBB" class="w-16 h-16 rounded-lg shadow-lg z-10 relative object-cover">
+                    <div class="ml-4 z-10 relative">
+                        <h3 class="font-bold text-white text-lg group-hover:text-blue-300 transition">Mobile Legends</h3>
+                        <p class="text-xs text-blue-200">Moonton</p>
+                    </div>
+                </div>
+
+                <div class="relative bg-gradient-to-r from-blue-900 to-slate-800 rounded-xl p-4 flex items-center overflow-hidden hover:scale-[1.02] transition cursor-pointer border border-transparent hover:border-blue-400 group">
+                    <div class="absolute inset-0 bg-stripes-white pointer-events-none"></div>
+                    <img src="assets/logo-game/logo-miya-mlbb.jpg" alt="MLBB Irit" class="w-16 h-16 rounded-lg shadow-lg z-10 relative object-cover">
+                    <div class="ml-4 z-10 relative">
+                        <h3 class="font-bold text-white text-lg group-hover:text-blue-300 transition">MLBB Paket Irit</h3>
+                        <p class="text-xs text-blue-200">Moonton</p>
+                    </div>
+                </div>
+
+                <div class="relative bg-gradient-to-r from-sky-700 to-blue-600 rounded-xl p-4 flex items-center overflow-hidden hover:scale-[1.02] transition cursor-pointer border border-transparent hover:border-sky-300 group">
+                    <div class="absolute inset-0 bg-stripes-white pointer-events-none"></div>
+                    <img src="assets/logo-game/logo-pubg.jpg" alt="PUBG" class="w-16 h-16 rounded-lg shadow-lg z-10 relative object-cover">
+                    <div class="ml-4 z-10 relative">
+                        <h3 class="font-bold text-white text-lg group-hover:text-sky-200 transition">PUBG Mobile</h3>
+                        <p class="text-xs text-sky-100">Tencent Games</p>
+                    </div>
+                </div>
+
+                <div class="relative bg-gradient-to-r from-indigo-900 to-slate-900 rounded-xl p-4 flex items-center overflow-hidden hover:scale-[1.02] transition cursor-pointer border border-transparent hover:border-indigo-400 group">
+                    <div class="absolute inset-0 bg-stripes-white pointer-events-none"></div>
+                    <img src="assets/logo-game/logo-freefire.png" alt="FF" class="w-16 h-16 rounded-lg shadow-lg z-10 relative object-cover">
+                    <div class="ml-4 z-10 relative">
+                        <h3 class="font-bold text-white text-lg group-hover:text-indigo-300 transition">Free Fire</h3>
+                        <p class="text-xs text-indigo-200">Garena</p>
+                    </div>
+                </div>
+
+                <div class="relative bg-gray-200 rounded-xl p-4 flex items-center overflow-hidden hover:scale-[1.02] transition cursor-pointer border border-transparent hover:border-gray-400 group">
+                    <div class="absolute inset-0 bg-stripes-dark pointer-events-none"></div>
+                    <img src="assets/logo-game/cyrus.png" alt="Joki" class="w-16 h-16 rounded-lg shadow-lg z-10 relative object-cover">
+                    <div class="ml-4 z-10 relative">
+                        <h3 class="font-bold text-gray-800 text-lg group-hover:text-black transition">Joki Rank Eceran</h3>
+                        <p class="text-xs text-gray-500">CYRUS Store</p>
+                    </div>
+                </div>
+
+                <div class="relative bg-[#e8e6d9] rounded-xl p-4 flex items-center overflow-hidden hover:scale-[1.02] transition cursor-pointer border border-transparent hover:border-primary group">
+                    <div class="absolute inset-0 bg-stripes-dark pointer-events-none"></div>
+                    <img src="assets/logo-game/cyrus.png" alt="Paket" class="w-16 h-16 rounded-lg shadow-lg z-10 relative object-cover">
+                    <div class="ml-4 z-10 relative">
+                        <h3 class="font-bold text-gray-800 text-lg group-hover:text-black transition">Joki Rank Paketan</h3>
+                        <p class="text-xs text-gray-500">CYRUS Store</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        
+     
+        <div class="mb-12">
+            <h2 class="text-2xl font-bold mb-6 flex items-center border-l-4 border-primary pl-3 text-white">
+                <i class="fa-solid fa-gamepad text-primary mr-2"></i> Pilihan Game Lainnya
+            </h2>
+            
+            <div id="game-grid" class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4">
+                </div>
+
+            <div class="mt-8 text-center" id="load-more-container">
+                <button id="load-more-btn" class="bg-secondary hover:bg-gray-700 text-white font-semibold py-3 px-8 rounded-full border border-gray-600 transition duration-300 shadow-lg group">
+                    Tampilkan Lainnya
+                    <i class="fa-solid fa-chevron-down ml-2 group-hover:translate-y-1 transition"></i>
+                </button>
+            </div>
+        </div>
+       
+        <div class="mb-16 mt-16">
+            <div class="text-center mb-10">
+                <h2 class="text-3xl font-bold text-white mb-2">PILIH PAKET JOKI</h2>
+                <p class="text-gray-400">Sesuaikan dengan target dan budget kamu.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 items-center">
+                
+                <div class="bg-secondary rounded-2xl p-6 border border-gray-700 hover:border-green-500 transition duration-300 relative group">
+                    <div class="absolute top-0 right-0 bg-gray-700 text-xs font-bold px-3 py-1 rounded-bl-lg rounded-tr-lg text-gray-300">Ekonomis</div>
+                    
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 bg-gray-800 rounded-full flex items-center justify-center text-green-500 text-xl">
+                            <i class="fa-solid fa-piggy-bank"></i>
+                        </div>
+                        <h3 class="ml-4 text-xl font-bold text-white">Paket Hemat</h3>
+                    </div>
+                    
+                    <p class="text-gray-400 text-sm mb-6 h-10">Cocok untuk pelajar atau push rank santai dengan harga bersahabat.</p>
+                    
+                    <div class="space-y-3 mb-8">
+                        <li class="flex items-center text-sm text-gray-300">
+                            <i class="fa-solid fa-check text-green-500 mr-2"></i> Penjoki Publik (Random)
+                        </li>
+                        <li class="flex items-center text-sm text-gray-300">
+                            <i class="fa-solid fa-check text-green-500 mr-2"></i> Proses 1-3 Hari
+                        </li>
+                        <li class="flex items-center text-sm text-gray-300">
+                            <i class="fa-solid fa-check text-green-500 mr-2"></i> Garansi Login Aman
+                        </li>
+                        <li class="flex items-center text-sm text-gray-500 line-through">
+                            <i class="fa-solid fa-xmark text-red-500 mr-2"></i> Request Hero
+                        </li>
+                    </div>
+
+                    <button class="w-full block bg-transparent border border-green-500 text-green-500 hover:bg-green-500 hover:text-white font-bold py-3 rounded-xl transition">
+                        Pilih Hemat
+                    </button>
+                </div>
+
+                <div class="bg-gradient-to-b from-gray-800 to-secondary rounded-2xl p-8 border-2 border-primary shadow-[0_0_30px_rgba(212,175,55,0.15)] transform md:scale-110 z-10 relative">
+                    <div class="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-primary text-darker font-extrabold px-4 py-1 rounded-full text-sm shadow-lg border-4 border-darker">
+                        <i class="fa-solid fa-fire mr-1"></i> PALING LARIS
+                    </div>
+
+                    <div class="flex items-center mb-4 mt-2">
+                        <div class="w-14 h-14 bg-primary bg-opacity-20 rounded-full flex items-center justify-center text-primary text-2xl">
+                            <i class="fa-solid fa-crown"></i>
+                        </div>
+                        <h3 class="ml-4 text-2xl font-bold text-primary">Paket Spesial</h3>
+                    </div>
+                    
+                    <p class="text-gray-300 text-sm mb-6 h-10">Pilihan terbaik! Keseimbangan harga dan kecepatan pengerjaan.</p>
+                    
+                    <div class="space-y-4 mb-8">
+                        <li class="flex items-center text-sm text-white font-semibold">
+                            <i class="fa-solid fa-check-circle text-primary mr-2"></i> Penjoki Semi-Pro / Mythic
+                        </li>
+                        <li class="flex items-center text-sm text-white font-semibold">
+                            <i class="fa-solid fa-check-circle text-primary mr-2"></i> Proses Cepat (Prioritas)
+                        </li>
+                        <li class="flex items-center text-sm text-white font-semibold">
+                            <i class="fa-solid fa-check-circle text-primary mr-2"></i> Bebas Request 3 Hero
+                        </li>
+                        <li class="flex items-center text-sm text-white font-semibold">
+                            <i class="fa-solid fa-check-circle text-primary mr-2"></i> Live Screenshot Progress
+                        </li>
+                    </div>
+
+                    <button class="w-full block bg-primary text-darker font-bold py-4 rounded-xl hover:bg-yellow-400 transition shadow-lg">
+                        Order Sekarang
+                    </button>
+                </div>
+
+                <div class="bg-secondary rounded-2xl p-6 border border-gray-700 hover:border-purple-500 transition duration-300 relative group">
+                    <div class="absolute top-0 right-0 bg-purple-900 text-xs font-bold px-3 py-1 rounded-bl-lg rounded-tr-lg text-purple-200">Sultan</div>
+
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 bg-gray-800 rounded-full flex items-center justify-center text-purple-500 text-xl">
+                            <i class="fa-solid fa-medal"></i>
+                        </div>
+                        <h3 class="ml-4 text-xl font-bold text-white">Professional</h3>
+                    </div>
+                    
+                    <p class="text-gray-400 text-sm mb-6 h-10">Layanan VIP untuk kamu yang ingin winrate 100% dan pengerjaan kilat.</p>
+                    
+                    <div class="space-y-3 mb-8">
+                        <li class="flex items-center text-sm text-gray-300">
+                            <i class="fa-solid fa-check text-purple-500 mr-2"></i> Penjoki Ex-Pro Player
+                        </li>
+                        <li class="flex items-center text-sm text-gray-300">
+                            <i class="fa-solid fa-check text-purple-500 mr-2"></i> Jaminan Winrate 90-100%
+                        </li>
+                        <li class="flex items-center text-sm text-gray-300">
+                            <i class="fa-solid fa-check text-purple-500 mr-2"></i> Request Jadwal & Hero Full
+                        </li>
+                        <li class="flex items-center text-sm text-gray-300">
+                            <i class="fa-solid fa-video text-purple-500 mr-2"></i> Bonus Live Streaming
+                        </li>
+                    </div>
+
+                    <button class="w-full block bg-transparent border border-purple-500 text-purple-500 hover:bg-purple-600 hover:text-white font-bold py-3 rounded-xl transition">
+                        Pilih Pro
+                    </button>
+                </div>
+
+            </div>
+        </div>
+
+ 
+        <div class="mb-16">
+            <div class="flex flex-col md:flex-row justify-between items-end mb-8">
+                <div>
+                    <h2 class="text-3xl font-bold text-white mb-2 flex items-center">
+                        <i class="fa-solid fa-shop text-primary mr-3"></i> BURSA AKUN GAME
+                    </h2>
+                    <p class="text-gray-400">Akun terverifikasi aman 100% dengan spek sesuai selera.</p>
+                </div>
+                <a href="#" class="text-primary hover:text-white font-semibold mt-4 md:mt-0 transition">
+                    Lihat Semua Katalog <i class="fa-solid fa-arrow-right ml-1"></i>
+                </a>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+                <div class="relative bg-secondary rounded-xl overflow-hidden group border border-gray-700 hover:border-primary transition duration-300 shadow-lg">
+                    <div class="h-48 overflow-hidden relative">
+                        <div class="absolute top-3 right-3 z-10 bg-primary text-darker text-xs font-extrabold px-3 py-1 rounded-full shadow-md">LUXURY</div>
+                        <img src="https://placehold.co/600x400/d4af37/000?text=Sultan+Account" alt="Luxury" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
+                        <div class="absolute inset-0 bg-gradient-to-t from-secondary via-transparent to-transparent"></div>
+                    </div>
+                    <div class="p-5">
+                        <h3 class="text-xl font-bold text-white group-hover:text-primary transition">Akun Sultan Luxury</h3>
+                        <p class="text-sm text-gray-400 mt-1 mb-4">Spesifikasi rata kanan. Semua skin limited, recall tas-tas, border event lengkap.</p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="bg-gray-800 text-gray-300 text-xs px-2 py-1 rounded border border-gray-600">Skin 500+</span>
+                            <span class="bg-gray-800 text-gray-300 text-xs px-2 py-1 rounded border border-gray-600">Emblem Max</span>
+                            <span class="bg-gray-800 text-gray-300 text-xs px-2 py-1 rounded border border-gray-600">Recall Tas Tas</span>
+                        </div>
+                        <div class="flex justify-between items-center border-t border-gray-700 pt-4">
+                            <span class="text-primary font-bold text-lg">Rp 5.000.000++</span>
+                            <button class="bg-primary text-darker px-4 py-1.5 rounded-lg text-sm font-bold hover:bg-yellow-400 transition">Cek Detail</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="relative bg-secondary rounded-xl overflow-hidden group border border-gray-700 hover:border-red-500 transition duration-300 shadow-lg">
+                    <div class="h-48 overflow-hidden relative">
+                        <div class="absolute top-3 right-3 z-10 bg-red-600 text-white text-xs font-extrabold px-3 py-1 rounded-full shadow-md">PRO SPECS</div>
+                        <img src="https://placehold.co/600x400/991b1b/FFF?text=Top+Global" alt="Pro Player" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
+                        <div class="absolute inset-0 bg-gradient-to-t from-secondary via-transparent to-transparent"></div>
+                    </div>
+                    <div class="p-5">
+                        <h3 class="text-xl font-bold text-white group-hover:text-red-500 transition">Eks Pro / Top Global</h3>
+                        <p class="text-sm text-gray-400 mt-1 mb-4">Fokus statistik tempur. Winrate tinggi, MMR ribuan, Title Supreme/Global.</p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="bg-gray-800 text-gray-300 text-xs px-2 py-1 rounded border border-gray-600">WR 80%+</span>
+                            <span class="bg-gray-800 text-gray-300 text-xs px-2 py-1 rounded border border-gray-600">Ex Glory/Immo</span>
+                            <span class="bg-gray-800 text-gray-300 text-xs px-2 py-1 rounded border border-gray-600">Title Supreme</span>
+                        </div>
+                        <div class="flex justify-between items-center border-t border-gray-700 pt-4">
+                            <span class="text-red-500 font-bold text-lg">Rp 2.5jt - 10jt</span>
+                            <button class="bg-red-600 text-white px-4 py-1.5 rounded-lg text-sm font-bold hover:bg-red-500 transition">Cek Detail</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="relative bg-secondary rounded-xl overflow-hidden group border border-gray-700 hover:border-purple-500 transition duration-300 shadow-lg">
+                    <div class="h-48 overflow-hidden relative">
+                        <div class="absolute top-3 right-3 z-10 bg-purple-600 text-white text-xs font-extrabold px-3 py-1 rounded-full shadow-md">COLLECTOR</div>
+                        <img src="https://placehold.co/600x400/6b21a8/FFF?text=Full+Skin" alt="Full Skin" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
+                        <div class="absolute inset-0 bg-gradient-to-t from-secondary via-transparent to-transparent"></div>
+                    </div>
+                    <div class="p-5">
+                        <h3 class="text-xl font-bold text-white group-hover:text-purple-400 transition">Full Skin / Item</h3>
+                        <p class="text-sm text-gray-400 mt-1 mb-4">Surganya kolektor. Skin collab (Anime/Movie), Legend, dan event langka.</p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="bg-gray-800 text-gray-300 text-xs px-2 py-1 rounded border border-gray-600">Skin Collab</span>
+                            <span class="bg-gray-800 text-gray-300 text-xs px-2 py-1 rounded border border-gray-600">Skin Legend</span>
+                            <span class="bg-gray-800 text-gray-300 text-xs px-2 py-1 rounded border border-gray-600">Efek Full</span>
+                        </div>
+                        <div class="flex justify-between items-center border-t border-gray-700 pt-4">
+                            <span class="text-purple-400 font-bold text-lg">Start Rp 3.000.000</span>
+                            <button class="bg-purple-600 text-white px-4 py-1.5 rounded-lg text-sm font-bold hover:bg-purple-500 transition">Cek Detail</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="relative bg-secondary rounded-xl overflow-hidden group border border-gray-700 hover:border-gray-300 transition duration-300 shadow-lg">
+                    <div class="h-48 overflow-hidden relative">
+                        <div class="absolute top-3 right-3 z-10 bg-gray-200 text-black text-xs font-extrabold px-3 py-1 rounded-full shadow-md">EXCLUSIVE</div>
+                        <img src="https://placehold.co/600x400/374151/FFF?text=Expensive+Rare" alt="Expensive" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
+                        <div class="absolute inset-0 bg-gradient-to-t from-secondary via-transparent to-transparent"></div>
+                    </div>
+                    <div class="p-5">
+                        <h3 class="text-xl font-bold text-white group-hover:text-gray-300 transition">High-End & Rare</h3>
+                        <p class="text-sm text-gray-400 mt-1 mb-4">Akun dengan ID cantik, skin Beta test, atau item yang tidak akan rilis lagi.</p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="bg-gray-800 text-gray-300 text-xs px-2 py-1 rounded border border-gray-600">ID Cantik</span>
+                            <span class="bg-gray-800 text-gray-300 text-xs px-2 py-1 rounded border border-gray-600">Old Season</span>
+                            <span class="bg-gray-800 text-gray-300 text-xs px-2 py-1 rounded border border-gray-600">Server Lama</span>
+                        </div>
+                        <div class="flex justify-between items-center border-t border-gray-700 pt-4">
+                            <span class="text-white font-bold text-lg">Hubungi Admin</span>
+                            <button class="bg-gray-200 text-black px-4 py-1.5 rounded-lg text-sm font-bold hover:bg-white transition">Kontak</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="relative bg-secondary rounded-xl overflow-hidden group border border-gray-700 hover:border-blue-400 transition duration-300 shadow-lg">
+                    <div class="h-48 overflow-hidden relative">
+                        <div class="absolute top-3 right-3 z-10 bg-blue-500 text-white text-xs font-extrabold px-3 py-1 rounded-full shadow-md">BEST VALUE</div>
+                        <img src="https://placehold.co/600x400/1e3a8a/FFF?text=Akun+Nanggung" alt="Nanggung" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
+                        <div class="absolute inset-0 bg-gradient-to-t from-secondary via-transparent to-transparent"></div>
+                    </div>
+                    <div class="p-5">
+                        <h3 class="text-xl font-bold text-white group-hover:text-blue-400 transition">Mid-High / Nanggung</h3>
+                        <p class="text-sm text-gray-400 mt-1 mb-4">Spek lumayan, harga kawan. Emblem max tapi skin belum full, atau WR bagus skin dikit.</p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="bg-gray-800 text-gray-300 text-xs px-2 py-1 rounded border border-gray-600">Smurf Killer</span>
+                            <span class="bg-gray-800 text-gray-300 text-xs px-2 py-1 rounded border border-gray-600">Emblem Max</span>
+                            <span class="bg-gray-800 text-gray-300 text-xs px-2 py-1 rounded border border-gray-600">Hero Banyak</span>
+                        </div>
+                        <div class="flex justify-between items-center border-t border-gray-700 pt-4">
+                            <span class="text-blue-400 font-bold text-lg">Rp 100rb - 500rb</span>
+                            <button class="bg-blue-600 text-white px-4 py-1.5 rounded-lg text-sm font-bold hover:bg-blue-500 transition">Cek Detail</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="relative bg-gray-800 rounded-xl overflow-hidden flex items-center justify-center border border-dashed border-gray-600">
+                    <div class="text-center p-6">
+                        <i class="fa-solid fa-box-open text-4xl text-gray-600 mb-3"></i>
+                        <h3 class="text-lg font-bold text-gray-500">Kategori Baru</h3>
+                        <p class="text-xs text-gray-600 mt-1">Segera Hadir</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        
+        <div id="rekber-section" class="mb-16">
+    
+    <div class="text-center mb-10">
+        <h2 class="text-3xl font-bold text-white mb-2 uppercase tracking-wide">
+            Jasa <span class="text-primary">Rekber</span> & Iklan
+        </h2>
+        <p class="text-gray-400">Transaksi aman tanpa was-was. Dana cair saat akun aman.</p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+
+        <div class="bg-secondary rounded-2xl p-6 border border-gray-700 hover:border-blue-400 transition duration-300 relative group flex flex-col">
+            <div class="w-14 h-14 bg-blue-900/30 rounded-full flex items-center justify-center text-blue-400 text-2xl mb-4 group-hover:scale-110 transition">
+                <i class="fa-solid fa-bullhorn"></i>
+            </div>
+            
+            <h3 class="text-xl font-bold text-white mb-2">Iklan Media Sosial</h3>
+            <p class="text-sm text-gray-400 mb-6 flex-grow">
+                Akunmu susah laku? Kami bantu posting di Instagram Story, Feed, dan Channel Telegram CYRUS dengan ribuan calon pembeli aktif.
+            </p>
+
+            <div class="bg-gray-800/50 rounded-lg p-3 mb-6">
+                <div class="flex justify-between items-center text-sm mb-1">
+                    <span class="text-gray-400">Jangkauan:</span>
+                    <span class="text-white font-bold">10k+ Viewers</span>
+                </div>
+                <div class="flex justify-between items-center text-sm">
+                    <span class="text-gray-400">Platform:</span>
+                    <span class="text-white font-bold"><i class="fa-brands fa-instagram"></i> <i class="fa-brands fa-telegram"></i> <i class="fa-brands fa-tiktok"></i></span>
+                </div>
+            </div>
+
+            <button class="w-full py-3 rounded-xl border border-blue-500 text-blue-400 font-bold hover:bg-blue-500 hover:text-white transition">
+                Pasang Iklan
+            </button>
+        </div>
+
+        <div class="bg-gradient-to-b from-gray-800 to-secondary rounded-2xl p-8 border-2 border-primary shadow-[0_0_20px_rgba(212,175,55,0.1)] relative transform md:-translate-y-4 z-10 flex flex-col">
+            <div class="absolute top-0 right-0 bg-primary text-darker text-xs font-bold px-4 py-1 rounded-bl-xl rounded-tr-xl">
+                RECOMMENDED
+            </div>
+
+            <div class="w-16 h-16 bg-primary/20 rounded-full flex items-center justify-center text-primary text-3xl mb-4 self-center">
+                <i class="fa-solid fa-handshake-simple"></i>
+            </div>
+            
+            <h3 class="text-2xl font-bold text-white text-center mb-2">Rekber Utama</h3>
+            <p class="text-sm text-gray-300 text-center mb-6">
+                Penengah transaksi jual beli antara Penjual dan Pembeli. Kami amankan uang pembeli dan data penjual sampai selesai.
+            </p>
+
+            <ul class="space-y-3 mb-8 text-sm text-gray-300">
+                <li class="flex items-center"><i class="fa-solid fa-shield-halved text-primary mr-3"></i> Grup Transaksi Real-time</li>
+                <li class="flex items-center"><i class="fa-solid fa-bolt text-primary mr-3"></i> Proses Cek Data 5-10 Menit</li>
+                <li class="flex items-center"><i class="fa-solid fa-percent text-primary mr-3"></i> Fee Admin Mulai 5rb Perak</li>
+            </ul>
+
+            <button class="w-full py-4 rounded-xl bg-primary text-darker font-extrabold text-lg hover:bg-yellow-400 transition shadow-lg mt-auto">
+                Request Rekber
+            </button>
+        </div>
+
+        <div class="bg-secondary rounded-2xl p-6 border border-gray-700 hover:border-green-400 transition duration-300 relative group flex flex-col">
+            <div class="w-14 h-14 bg-green-900/30 rounded-full flex items-center justify-center text-green-400 text-2xl mb-4 group-hover:scale-110 transition">
+                <i class="fa-solid fa-magnifying-glass-dollar"></i>
+            </div>
+            
+            <h3 class="text-xl font-bold text-white mb-2">Jasa Akuisisi</h3>
+            <p class="text-sm text-gray-400 mb-6 flex-grow">
+                Cari akun spek gaib? Atau mau jual akun instan (Fast Sell) ke admin? Kami bantu carikan atau beli akunmu dengan harga wajar.
+            </p>
+
+            <div class="bg-gray-800/50 rounded-lg p-3 mb-6">
+                <div class="flex justify-between items-center text-sm mb-1">
+                    <span class="text-gray-400">Layanan:</span>
+                    <span class="text-white font-bold">WTB / Fast Sell</span>
+                </div>
+                <div class="flex justify-between items-center text-sm">
+                    <span class="text-gray-400">Fee Jasa:</span>
+                    <span class="text-white font-bold">Menyesuaikan</span>
+                </div>
+            </div>
+
+            <button class="w-full py-3 rounded-xl border border-green-500 text-green-400 font-bold hover:bg-green-500 hover:text-white transition">
+                Konsultasi Akuisisi
+            </button>
+        </div>
+
+    </div>
+
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mt-8 bg-gray-800 rounded-xl p-6 border border-gray-700">
+        <div class="text-center border-r border-gray-700 last:border-0">
+            <h4 class="text-2xl font-bold text-white">15.4K+</h4>
+            <p class="text-xs text-gray-400">Transaksi Sukses</p>
+        </div>
+        <div class="text-center border-r border-gray-700 md:border-r last:border-0">
+            <h4 class="text-2xl font-bold text-primary">0</h4>
+            <p class="text-xs text-gray-400">Kasus Penipuan</p>
+        </div>
+        <div class="text-center border-r border-gray-700 last:border-0">
+            <h4 class="text-2xl font-bold text-white">24/7</h4>
+            <p class="text-xs text-gray-400">Layanan Aktif</p>
+        </div>
+        <div class="text-center">
+            <h4 class="text-2xl font-bold text-green-400">100%</h4>
+            <p class="text-xs text-gray-400">Uang Kembali</p>
+        </div>
+    </div>
+
+</div>
+
+        <div class="mb-12">
+            <h2 class="text-2xl font-bold mb-4 flex items-center border-l-4 border-primary pl-3">
+                <i class="fa-solid fa-screwdriver-wrench text-primary mr-2"></i> Bengkel Akun
+            </h2>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                
+                <div class="bg-gradient-to-br from-secondary to-gray-800 p-4 rounded-xl text-center hover:shadow-lg border border-transparent hover:border-primary transition cursor-pointer group">
+                    <i class="fa-solid fa-user-shield text-4xl text-red-500 mb-3 group-hover:scale-110 transition"></i>
+                    <h4 class="font-bold text-white">Hackback</h4>
+                    <p class="text-xs text-gray-400 mt-1">Pemulihan Akun</p>
+                </div>
+                
+                <div class="bg-gradient-to-br from-secondary to-gray-800 p-4 rounded-xl text-center hover:shadow-lg border border-transparent hover:border-primary transition cursor-pointer group">
+                    <i class="fa-solid fa-link-slash text-4xl text-blue-500 mb-3 group-hover:scale-110 transition"></i>
+                    <h4 class="font-bold text-white">Unbind/Sync</h4>
+                    <p class="text-xs text-gray-400 mt-1">Masalah Login</p>
+                </div>
+
+                <div class="bg-gradient-to-br from-secondary to-gray-800 p-4 rounded-xl text-center hover:shadow-lg border border-transparent hover:border-primary transition cursor-pointer group">
+                    <i class="fa-solid fa-user-gear text-4xl text-purple-500 mb-3 group-hover:scale-110 transition"></i>
+                    <h4 class="font-bold text-white">Set Up Profile</h4>
+                    <p class="text-xs text-gray-400 mt-1">Make Over Akun</p>
+                </div>
+
+                <div class="bg-gradient-to-br from-secondary to-gray-800 p-4 rounded-xl text-center hover:shadow-lg border border-transparent hover:border-primary transition cursor-pointer group">
+                    <i class="fa-solid fa-comments text-4xl text-green-500 mb-3 group-hover:scale-110 transition"></i>
+                    <h4 class="font-bold text-white">Konsultasi</h4>
+                    <p class="text-xs text-gray-400 mt-1">Tanya Ahli</p>
+                </div>
+
+            </div>
+        </div>
+
+    </div> <footer class="bg-darker border-t border-gray-800 py-10 mt-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-4 gap-8">
+            <div class="col-span-1 md:col-span-2">
+                <h2 class="text-2xl font-bold text-primary mb-4">CYRUS</h2>
+                <p class="text-gray-400 text-sm leading-relaxed max-w-sm">
+                    CYRUS adalah platform layanan game terpercaya. Kami menyediakan Joki, Jual Beli Akun, dan Bengkel Akun dengan proses cepat dan aman.
+                </p>
+                <div class="flex space-x-4 mt-6">
+                    <a href="#" class="text-gray-400 hover:text-white"><i class="fa-brands fa-instagram text-2xl"></i></a>
+                    <a href="#" class="text-gray-400 hover:text-white"><i class="fa-brands fa-whatsapp text-2xl"></i></a>
+                    <a href="#" class="text-gray-400 hover:text-white"><i class="fa-brands fa-tiktok text-2xl"></i></a>
+                </div>
+            </div>
+
+            <div>
+                <h3 class="text-white font-bold mb-4">Peta Situs</h3>
+                <ul class="space-y-2 text-sm text-gray-400">
+                    <li><a href="#" class="hover:text-primary">Beranda</a></li>
+                    <li><a href="#" class="hover:text-primary">Cek Transaksi</a></li>
+                    <li><a href="#" class="hover:text-primary">Kalkulator WR</a></li>
+                    <li><a href="#" class="hover:text-primary">Ulasan</a></li>
+                </ul>
+            </div>
+
+            <div>
+                <h3 class="text-white font-bold mb-4">Dukungan</h3>
+                <ul class="space-y-2 text-sm text-gray-400">
+                    <li><a href="#" class="hover:text-primary">Hubungi Kami</a></li>
+                    <li><a href="#" class="hover:text-primary">Syarat & Ketentuan</a></li>
+                    <li><a href="#" class="hover:text-primary">Kebijakan Privasi</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="text-center text-gray-600 text-xs mt-10">
+            &copy; 2026 CYRUS Game Service. All rights reserved.
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script src="game.js"></script>
+</body>
+</html>

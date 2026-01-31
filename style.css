@@ -1,0 +1,161 @@
+/* Custom Scrollbar agar terlihat modern */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #121317; 
+}
+
+::-webkit-scrollbar-thumb {
+    background: #d4af37; 
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #b5952f; 
+}
+
+/* Style untuk Tombol Kategori */
+/* Kita menggunakan CSS biasa untuk mempermudah toggle class via JS */
+.category-btn {
+    background-color: #2d2f36; /* Warna Secondary default */
+    color: #e5e7eb;
+}
+
+.category-btn:hover {
+    background-color: #374151;
+}
+
+/* Class 'active' ini akan ditambahkan oleh JavaScript saat tombol diklik */
+.category-btn.active {
+    background-color: #d4af37; /* Warna Primary */
+    color: #121317; /* Warna Darker */
+}
+
+
+/* --- Tambahan untuk Section Populer --- */
+
+/* Efek Garis-garis Diagonal Halus */
+.bg-stripes-white {
+    background-image: linear-gradient(135deg, rgba(255, 255, 255, 0.05) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.05) 50%, rgba(255, 255, 255, 0.05) 75%, transparent 75%, transparent);
+    background-size: 20px 20px;
+}
+
+.bg-stripes-dark {
+    background-image: linear-gradient(135deg, rgba(0, 0, 0, 0.03) 25%, transparent 25%, transparent 50%, rgba(0, 0, 0, 0.03) 50%, rgba(0, 0, 0, 0.03) 75%, transparent 75%, transparent);
+    background-size: 20px 20px;
+}
+
+
+
+
+
+/* ----------------------------------------------------------- */
+/* 1. SCROLLBAR UTAMA (Desktop)                                */
+/* ----------------------------------------------------------- */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #121317; 
+}
+
+::-webkit-scrollbar-thumb {
+    background: #d4af37; 
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #b5952f; 
+}
+
+/* ----------------------------------------------------------- */
+/* 2. TOMBOL KATEGORI                                          */
+/* ----------------------------------------------------------- */
+.category-btn {
+    background-color: #2d2f36;
+    color: #e5e7eb;
+    white-space: nowrap; /* Mencegah teks turun ke bawah */
+}
+
+.category-btn:hover {
+    background-color: #374151;
+}
+
+.category-btn.active {
+    background-color: #d4af37;
+    color: #121317;
+    box-shadow: 0 0 10px rgba(212, 175, 55, 0.5); /* Efek glowing dikit */
+}
+
+/* ----------------------------------------------------------- */
+/* 3. PATTERN BACKGROUND (STRIPES)                             */
+/* ----------------------------------------------------------- */
+.bg-stripes-white {
+    background-image: linear-gradient(135deg, rgba(255, 255, 255, 0.05) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.05) 50%, rgba(255, 255, 255, 0.05) 75%, transparent 75%, transparent);
+    background-size: 20px 20px;
+}
+
+.bg-stripes-dark {
+    background-image: linear-gradient(135deg, rgba(0, 0, 0, 0.03) 25%, transparent 25%, transparent 50%, rgba(0, 0, 0, 0.03) 50%, rgba(0, 0, 0, 0.03) 75%, transparent 75%, transparent);
+    background-size: 20px 20px;
+}
+
+/* ----------------------------------------------------------- */
+/* 4. KHUSUS MOBILE (RESPONSIVE TWEAKS)                        */
+/* ----------------------------------------------------------- */
+
+/* A. Menu Horizontal (Category Container) 
+   Agar bisa digeser kanan-kiri tanpa scrollbar jelek */
+#category-container {
+    -ms-overflow-style: none;  /* Internet Explorer 10+ */
+    scrollbar-width: none;  /* Firefox */
+    cursor: grab;
+    
+    /* Efek Magnet saat scroll di HP */
+    scroll-snap-type: x mandatory; 
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+}
+
+#category-container::-webkit-scrollbar { 
+    display: none;  /* Safari and Chrome */
+}
+
+/* Agar tombol kategori pas di tengah saat digeser */
+.category-btn {
+    scroll-snap-align: start;
+}
+
+/* B. Penyesuaian Font di Layar Kecil (Max Width 640px) */
+@media (max-width: 640px) {
+    
+    /* Judul Section tidak terlalu besar di HP */
+    h2 {
+        font-size: 1.25rem !important; /* Setara text-xl */
+        line-height: 1.75rem !important;
+    }
+
+    /* Judul Banner Hero */
+    h1 {
+        font-size: 1.75rem !important; /* Setara text-3xl */
+    }
+
+    /* Padding Section agar tidak terlalu mepet pinggir HP */
+    .section-container {
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
+
+    /* Perbaikan Grid Gap di Mobile agar tidak terlalu renggang */
+    .grid {
+        gap: 1rem; /* Jarak antar kartu lebih rapat di HP */
+    }
+}
+
+/* C. Animasi Halus (Optional) */
+html {
+    scroll-behavior: smooth;
+}
