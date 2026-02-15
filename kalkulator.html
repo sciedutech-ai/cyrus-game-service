@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kalkulator Joki - MOMO STORE</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        dark: '#1a1b21',
+                        darker: '#121317',
+                        primary: '#d4af37',
+                        secondary: '#2d2f36'
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-dark text-gray-200 font-sans antialiased overflow-hidden" id="body-content">
+
+    <div id="tnc-modal" class="fixed inset-0 z-[100] flex items-center justify-center backdrop-blur-sm bg-black/80 transition-opacity duration-300">
+        <div class="bg-secondary border-2 border-primary rounded-2xl w-full max-w-lg p-8 shadow-[0_0_50px_rgba(212,175,55,0.2)] m-4">
+            <div class="text-center mb-6">
+                <i class="fa-solid fa-scroll text-5xl text-primary mb-4"></i>
+                <h2 class="text-2xl font-bold text-white uppercase">Syarat & Ketentuan</h2>
+                <p class="text-gray-400 text-sm">Harap baca sebelum melanjutkan.</p>
+            </div>
+            <div class="bg-darker rounded-lg p-4 h-48 overflow-y-auto mb-6 text-sm text-gray-300 space-y-3 border border-gray-700 custom-scrollbar">
+                <p>1. <span class="text-primary">Keamanan:</span> Penjoki dilarang menyentuh inventory/diamond.</p>
+                <p>2. <span class="text-primary">Login:</span> DILARANG LOGIN (menabrak) saat proses joki berlangsung.</p>
+                <p>3. <span class="text-primary">Verifikasi:</span> Mohon standby untuk kode OTP jika diperlukan.</p>
+                <p>4. <span class="text-primary">Estimasi:</span> Waktu pengerjaan tergantung antrian dan tingkat kesulitan.</p>
+            </div>
+            <div class="flex items-center mb-6 cursor-pointer" onclick="toggleCheckbox()">
+                <div class="w-6 h-6 border-2 border-gray-500 rounded flex items-center justify-center mr-3 transition" id="checkbox-box">
+                    <i class="fa-solid fa-check text-darker opacity-0 transition" id="checkbox-icon"></i>
+                </div>
+                <span class="text-gray-300 select-none text-sm">Saya menyetujui syarat & ketentuan.</span>
+            </div>
+            <button id="btn-agree" disabled class="w-full bg-gray-600 text-gray-400 font-bold py-3 rounded-xl transition duration-300 cursor-not-allowed">
+                SETUJU & LANJUT
+            </button>
+        </div>
+    </div>
+
+    <nav class="bg-darker border-b border-gray-800 sticky top-0 z-40">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <a href="index.html" class="text-2xl font-bold text-primary tracking-wider"><i class="fa-solid fa-gamepad mr-2"></i>CYRUS</a>
+                <a href="index.html" class="text-gray-400 hover:text-white transition text-sm"><i class="fa-solid fa-arrow-left mr-1"></i> Kembali</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="max-w-4xl mx-auto px-4 py-10">
+        
+        <div class="text-center mb-8">
+            <h1 class="text-3xl font-bold text-white mb-2">KALKULATOR JOKI</h1>
+            <p class="text-gray-400">Pilih metode perhitungan sesuai kebutuhanmu.</p>
+        </div>
+
+        <div class="flex justify-center mb-8 space-x-4">
+            <button onclick="switchTab('eceran')" id="tab-eceran" class="px-6 py-2 rounded-full font-bold transition border border-primary bg-primary text-darker shadow-[0_0_15px_rgba(212,175,55,0.4)]">
+                <i class="fa-solid fa-star mr-2"></i>Per Bintang
+            </button>
+            <button onclick="switchTab('paket')" id="tab-paket" class="px-6 py-2 rounded-full font-bold transition border border-gray-600 text-gray-400 hover:border-primary hover:text-primary">
+                <i class="fa-solid fa-layer-group mr-2"></i>Paket Tier
+            </button>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-12 gap-8">
+            
+            <div class="md:col-span-7 space-y-6">
+                
+                <div id="content-eceran" class="animate-fade-in">
+                    <div class="bg-secondary p-6 rounded-2xl border border-gray-700 mb-6">
+                        <h3 class="text-lg font-bold text-white mb-4 border-l-4 border-primary pl-3">1. Pilih Tier Saat Ini</h3>
+                        <div class="grid grid-cols-2 gap-3" id="rank-options">
+                            </div>
+                    </div>
+
+                    <div class="bg-secondary p-6 rounded-2xl border border-gray-700">
+                        <h3 class="text-lg font-bold text-white mb-4 border-l-4 border-primary pl-3">2. Jumlah Bintang</h3>
+                        <div class="flex items-center">
+                            <button onclick="updateStars(-1)" class="w-12 h-12 bg-gray-700 rounded-l-xl hover:bg-red-500 text-white font-bold">-</button>
+                            <input type="number" id="star-input" value="1" min="1" class="w-full h-12 bg-darker text-white text-center font-bold focus:outline-none border-y border-gray-700">
+                            <button onclick="updateStars(1)" class="w-12 h-12 bg-gray-700 rounded-r-xl hover:bg-green-500 text-white font-bold">+</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="content-paket" class="hidden animate-fade-in">
+                    <div class="bg-secondary p-6 rounded-2xl border border-gray-700 space-y-6">
+                        
+                        <div>
+                            <h3 class="text-lg font-bold text-white mb-3 border-l-4 border-primary pl-3">Mulai Dari Tier?</h3>
+                            <div class="relative">
+                                <select id="start-tier-select" class="w-full bg-darker text-white p-4 rounded-xl border border-gray-600 focus:border-primary focus:outline-none appearance-none cursor-pointer font-bold">
+                                    </select>
+                                <div class="absolute inset-y-0 right-0 flex items-center px-4 pointer-events-none text-primary">
+                                    <i class="fa-solid fa-chevron-down"></i>
+                                </div>
+                            </div>
+                            
+                            <div class="mt-4 bg-gray-800 p-4 rounded-xl border border-gray-600">
+                                <label class="text-xs text-gray-300 mb-2 block uppercase font-bold tracking-wider">Sudah punya berapa bintang?</label>
+                                <div class="flex items-center">
+                                     <button onclick="updateStartStars(-1)" class="w-12 h-10 bg-gray-700 rounded-l-lg hover:bg-red-500 text-white font-bold transition">-</button>
+                                     <input type="number" id="start-star-input" value="0" min="0" class="w-full h-10 bg-darker text-white text-center font-bold focus:outline-none border-y border-gray-600">
+                                     <button onclick="updateStartStars(1)" class="w-12 h-10 bg-gray-700 rounded-r-lg hover:bg-green-500 text-white font-bold transition">+</button>
+                                </div>
+                                <p class="text-[10px] text-gray-500 mt-2 italic" id="max-star-hint">
+                                    *Masukkan total bintang yang sudah dimiliki di tier ini.
+                                </p>
+                            </div>
+                        </div>
+
+                        <div>
+                            <h3 class="text-lg font-bold text-white mb-3 border-l-4 border-primary pl-3">Target Ke Tier?</h3>
+                            <div class="relative">
+                                <select id="target-tier-select" class="w-full bg-darker text-white p-4 rounded-xl border border-gray-600 focus:border-primary focus:outline-none appearance-none cursor-pointer font-bold">
+                                    </select>
+                                <div class="absolute inset-y-0 right-0 flex items-center px-4 pointer-events-none text-green-500">
+                                    <i class="fa-solid fa-flag-checkered"></i>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="md:col-span-5">
+                <div class="bg-gradient-to-b from-gray-800 to-secondary p-6 rounded-2xl border-2 border-primary sticky top-24 shadow-2xl">
+                    <h3 class="text-xl font-bold text-primary mb-6 text-center">DETAIL ORDER</h3>
+                    
+                    <div class="space-y-4 mb-6">
+                        <div class="flex justify-between items-center text-xs uppercase tracking-widest text-gray-500 border-b border-gray-700 pb-2">
+                            <span>Tipe Order</span>
+                            <span id="summary-mode" class="text-primary font-bold">Eceran</span>
+                        </div>
+
+                        <div id="detail-eceran">
+                            <div class="flex justify-between text-sm mb-2">
+                                <span class="text-gray-400">Rank</span>
+                                <span class="font-bold text-white" id="summary-rank">-</span>
+                            </div>
+                            <div class="flex justify-between text-sm mb-2">
+                                <span class="text-gray-400">Jumlah</span>
+                                <span class="font-bold text-white" id="summary-qty">0 Bintang</span>
+                            </div>
+                        </div>
+
+                        <div id="detail-paket" class="hidden">
+                            <div class="flex justify-between text-sm mb-2">
+                                <span class="text-gray-400">Start</span>
+                                <div class="text-right">
+                                    <div class="font-bold text-white" id="summary-from">-</div>
+                                    <div class="text-xs text-primary" id="summary-start-stars">(0 Bintang)</div>
+                                </div>
+                            </div>
+                            <div class="flex justify-between text-sm mb-2">
+                                <span class="text-gray-400">Target</span>
+                                <span class="font-bold text-white" id="summary-to">-</span>
+                            </div>
+                            <div class="bg-darker p-2 rounded text-xs text-gray-400 mt-2 text-center border border-gray-700" id="summary-note">
+                                Menghitung...
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="flex justify-between items-center mb-8 pt-4 border-t border-gray-700">
+                        <span class="text-lg font-bold text-gray-300">Total</span>
+                        <span class="text-2xl font-extrabold text-green-400" id="total-price">Rp 0</span>
+                    </div>
+
+                    <button onclick="orderViaWA()" class="w-full bg-green-600 hover:bg-green-500 text-white font-bold py-4 rounded-xl transition flex items-center justify-center gap-2 shadow-lg group">
+                        <i class="fa-brands fa-whatsapp text-2xl group-hover:animate-bounce"></i>
+                        Order Sekarang
+                    </button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <script src="kalkulator.js"></script>
+</body>
+</html>

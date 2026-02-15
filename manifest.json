@@ -1,0 +1,20 @@
+{
+  "name": "MOMOOSTOREE_ ADMIN",
+  "short_name": "MomooAdmin",
+  "start_url": "/admin.html",
+  "display": "standalone",
+  "background_color": "#1a1b21",
+  "theme_color": "#d4af37",
+  "icons": [
+    {
+      "src": "assets/logo-game/cyrus.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "assets/logo-game/cyrus.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

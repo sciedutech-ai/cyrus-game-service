@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Admin Dashboard - MOMOOSTOREE_</title>
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <link rel="manifest" href="manifest.json">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        dark: '#1a1b21',
+                        darker: '#121317',
+                        primary: '#d4af37',
+                        secondary: '#2d2f36'
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .safe-bottom { padding-bottom: env(safe-area-inset-bottom); }
+    </style>
+</head>
+<body class="bg-dark text-gray-200 font-sans antialiased pb-24 md:pb-0">
+
+    <div id="login-overlay" class="fixed inset-0 z-[100] bg-darker flex items-center justify-center transition-opacity duration-300">
+        <div class="bg-secondary p-8 rounded-2xl border border-primary w-full max-w-sm text-center shadow-[0_0_50px_rgba(212,175,55,0.2)] m-4">
+            <div class="mb-6">
+                <div class="w-16 h-16 bg-primary/20 rounded-full flex items-center justify-center mx-auto mb-4 text-primary text-3xl">
+                    <i class="fa-solid fa-user-lock"></i>
+                </div>
+                <h2 class="text-2xl font-bold text-white">Admin Access</h2>
+                <p class="text-xs text-gray-400">Silakan login menggunakan akun Firebase.</p>
+            </div>
+            
+            <form id="login-form" onsubmit="handleLogin(event)" class="space-y-4">
+                <input type="email" id="admin-email" required placeholder="Email Admin" 
+                    class="w-full bg-darker text-white px-4 py-3 rounded-xl border border-gray-600 focus:border-primary focus:outline-none placeholder-gray-500">
+                
+                <input type="password" id="admin-pass" required placeholder="Password" 
+                    class="w-full bg-darker text-white px-4 py-3 rounded-xl border border-gray-600 focus:border-primary focus:outline-none placeholder-gray-500">
+                
+                <button type="submit" id="btn-login" 
+                    class="w-full bg-primary text-darker font-bold py-3 rounded-xl hover:bg-yellow-400 transition shadow-lg">
+                    MASUK DASHBOARD
+                </button>
+            </form>
+            <p id="login-error" class="text-red-500 text-xs mt-4 hidden"></p>
+        </div>
+    </div>
+
+    <div class="flex h-screen overflow-hidden">
+        <aside class="w-64 bg-darker border-r border-gray-800 hidden md:flex flex-col">
+            <div class="p-6">
+                <h1 class="text-2xl font-bold text-primary tracking-wider">MOMO ADMIN</h1>
+            </div>
+            <nav class="flex-1 px-4 flex flex-col justify-between pb-6">
+                <div class="space-y-2">
+                    <a href="#" class="flex items-center px-4 py-3 rounded-xl bg-primary text-darker font-bold">
+                        <i class="fa-solid fa-gamepad mr-3"></i>Stok Akun ML
+                    </a>
+                    <a href="index.html" target="_blank" class="flex items-center px-4 py-3 rounded-xl text-gray-400 hover:bg-secondary hover:text-white transition">
+                        <i class="fa-solid fa-arrow-up-right-from-square mr-3"></i>Lihat Website
+                    </a>
+                </div>
+                
+                <button onclick="handleLogout()" class="flex items-center w-full text-left px-4 py-3 rounded-xl text-red-400 hover:bg-red-900/30 hover:text-red-300 transition border border-transparent hover:border-red-800">
+                    <i class="fa-solid fa-right-from-bracket mr-3"></i>Keluar
+                </button>
+            </nav>
+        </aside>
+
+        <div class="md:hidden fixed bottom-0 left-0 right-0 bg-darker border-t border-gray-800 z-50 flex justify-around items-center py-3 safe-bottom px-6">
+            <a href="#" class="text-primary flex flex-col items-center">
+                <i class="fa-solid fa-gamepad text-xl"></i>
+                <span class="text-[10px] mt-1 font-bold">Produk</span>
+            </a>
+            <button onclick="openModal()" class="bg-primary text-darker w-14 h-14 rounded-full flex items-center justify-center shadow-[0_0_20px_rgba(212,175,55,0.3)] -translate-y-6 border-4 border-dark transition-transform active:scale-90">
+                <i class="fa-solid fa-plus text-2xl"></i>
+            </button>
+            <button onclick="handleLogout()" class="text-gray-500 flex flex-col items-center">
+                <i class="fa-solid fa-right-from-bracket text-xl"></i>
+                <span class="text-[10px] mt-1 font-bold">Keluar</span>
+            </button>
+        </div>
+
+        <main class="flex-1 overflow-y-auto p-4 md:p-8">
+            <div class="flex justify-between items-center mb-6 md:mb-8">
+                <h2 class="text-2xl md:text-3xl font-bold text-white">Manajemen Akun</h2>
+                <button onclick="openModal()" class="hidden md:flex bg-green-600 hover:bg-green-500 text-white px-6 py-2 rounded-xl font-bold shadow-lg items-center transition">
+                    <i class="fa-solid fa-plus mr-2"></i> Tambah Akun
+                </button>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6 mb-8">
+                <div class="bg-secondary p-5 md:p-6 rounded-2xl border border-gray-700 flex justify-between items-center md:block">
+                    <h3 class="text-gray-400 text-xs md:text-sm">Total Stok</h3>
+                    <p class="text-2xl md:text-3xl font-bold text-white mt-0 md:mt-1" id="stat-total">0</p>
+                </div>
+                <div class="bg-secondary p-5 md:p-6 rounded-2xl border border-gray-700 flex justify-between items-center md:block">
+                    <h3 class="text-gray-400 text-xs md:text-sm">Tersedia</h3>
+                    <p class="text-2xl md:text-3xl font-bold text-green-400 mt-0 md:mt-1" id="stat-active">0</p>
+                </div>
+                <div class="bg-secondary p-5 md:p-6 rounded-2xl border border-gray-700 flex justify-between items-center md:block">
+                    <h3 class="text-gray-400 text-xs md:text-sm">Terjual</h3>
+                    <p class="text-2xl md:text-3xl font-bold text-red-400 mt-0 md:mt-1" id="stat-sold">0</p>
+                </div>
+            </div>
+
+            <div class="bg-secondary rounded-2xl border border-gray-700 overflow-hidden shadow-xl">
+                <div class="overflow-x-auto no-scrollbar">
+                    <table class="w-full text-left min-w-[600px] md:min-w-full">
+                        <thead class="bg-darker text-gray-400 uppercase text-[10px] md:text-xs tracking-wider">
+                            <tr>
+                                <th class="px-6 py-4">Foto</th>
+                                <th class="px-6 py-4 hidden md:table-cell">Judul Akun</th>
+                                <th class="px-6 py-4 hidden md:table-cell">Harga</th>
+                                <th class="px-6 py-4">Rank</th>
+                                <th class="px-6 py-4">Status</th>
+                                <th class="px-6 py-4 text-right">Aksi</th>
+                            </tr>
+                        </thead>
+                        <tbody id="account-table-body" class="divide-y divide-gray-700 text-sm text-gray-300">
+                            </tbody>
+                    </table>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <div id="account-modal" class="fixed inset-0 z-[110] flex items-end md:items-center justify-center bg-black/80 backdrop-blur-sm hidden">
+        <div class="bg-secondary w-full max-w-2xl rounded-t-3xl md:rounded-2xl border-t md:border border-primary p-6 md:p-8 max-h-[92vh] overflow-y-auto">
+            <div class="flex justify-between items-center mb-6">
+                <h3 class="text-xl font-bold text-white" id="modal-title">Tambah Akun Baru</h3>
+                <button onclick="closeModal()" class="text-gray-400 hover:text-white p-2"><i class="fa-solid fa-xmark text-2xl"></i></button>
+            </div>
+            
+            <form id="account-form" onsubmit="saveAccount(event)">
+                <input type="hidden" id="inp-id">
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                    <div>
+                        <label class="block text-xs text-gray-400 mb-1">Judul Akun</label>
+                        <input type="text" id="inp-title" required class="w-full bg-darker border border-gray-600 rounded-xl p-3 text-white focus:border-primary focus:outline-none" placeholder="Cth: Akun Sultan Skin Legend">
+                    </div>
+                    <div>
+                        <label class="block text-xs text-gray-400 mb-1">Harga (IDR)</label>
+                        <input type="number" id="inp-price" required class="w-full bg-darker border border-gray-600 rounded-xl p-3 text-white focus:border-primary focus:outline-none" placeholder="500000">
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-2 md:grid-cols-3 gap-4 mb-4">
+                    <div class="col-span-2 md:col-span-1">
+                        <label class="block text-xs text-gray-400 mb-1">Rank</label>
+                        <select id="inp-rank" class="w-full bg-darker border border-gray-600 rounded-xl p-3 text-white focus:border-primary focus:outline-none">
+                            <option value="Epic">Epic</option>
+                            <option value="Legend">Legend</option>
+                            <option value="Mythic">Mythic</option>
+                            <option value="Glory">Mythic Glory</option>
+                            <option value="Immortal">Mythic Immortal</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-xs text-gray-400 mb-1">Skin</label>
+                        <input type="text" id="inp-skin" class="w-full bg-darker border border-gray-600 rounded-xl p-3 text-white focus:border-primary focus:outline-none" placeholder="250 Skin">
+                    </div>
+                    <div>
+                        <label class="block text-xs text-gray-400 mb-1">WR (%)</label>
+                        <input type="text" id="inp-wr" class="w-full bg-darker border border-gray-600 rounded-xl p-3 text-white focus:border-primary focus:outline-none" placeholder="55.5%">
+                    </div>
+                </div>
+
+                <div class="mb-4">
+                    <label class="block text-xs text-gray-400 mb-1">Screenshot Akun (Max 10 Foto)</label>
+                    <input type="file" id="inp-image-file" multiple accept="image/*" class="block w-full text-sm text-gray-400
+                        file:mr-4 file:py-2 file:px-4
+                        file:rounded-xl file:border-0
+                        file:text-xs file:font-bold
+                        file:bg-secondary file:text-primary
+                        hover:file:bg-gray-700
+                        cursor-pointer bg-darker border border-gray-600 rounded-xl focus:outline-none mb-2"
+                        onchange="previewMultipleImages(event)">
+
+                    <input type="hidden" id="inp-images-old">
+
+                    <div id="image-preview-container" class="hidden grid grid-cols-3 md:grid-cols-5 gap-2 mt-2">
+                        </div>
+                    <p class="text-[10px] text-gray-500 mt-1">*Format: JPG, PNG. Max 10 file sekaligus.</p>
+                </div>
+
+                <div class="mb-4">
+                    <label class="block text-xs text-gray-400 mb-1">Deskripsi Spek</label>
+                    <textarea id="inp-desc" rows="3" class="w-full bg-darker border border-gray-600 rounded-xl p-3 text-white focus:border-primary focus:outline-none" placeholder="Recall tas tas, Emblem Max, dll..."></textarea>
+                </div>
+
+                <div class="flex items-center justify-between bg-darker p-4 rounded-xl border border-gray-700 mb-6">
+                    <span class="text-sm font-medium text-gray-300">Tandai Terjual (Sold Out)</span>
+                    <label class="relative inline-flex items-center cursor-pointer">
+                        <input type="checkbox" id="inp-sold" class="sr-only peer">
+                        <div class="w-11 h-6 bg-gray-600 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-red-600"></div>
+                    </label>
+                </div>
+
+                <button type="submit" class="w-full bg-primary text-darker font-black py-4 rounded-xl hover:bg-yellow-400 transition shadow-lg uppercase tracking-wide">
+                    Simpan Data
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <script type="module" src="admin.js"></script>
+</body>
+</html>
